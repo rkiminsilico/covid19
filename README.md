@@ -11,3 +11,8 @@ Usage:
 2. The filename of the downloaded file is usually sequences.fasta.
 3. Run `python covid19.py -i sequences.fasta` Optionally, aligning specific proteins can be skipped with `--skip` option.
 4. Alignment will be done for each protein using the included clustalo and a browser page will be launched to view the multiple sequence alignments of the proteins.
+
+Help:
+* `python covid19.py -h` will show help.
+
+Contact: Rick Kim (rkim@insilico.us.com)
