@@ -1,0 +1,52 @@
+<html>
+<head>
+    <script src=/msa.min.gz.js></script>
+    <link rel='stylesheet' href='/style.css' />
+</head>
+<body>
+
+<div id='bodydiv'></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open('GET', '/cll', false);
+xmlhttp.send();
+var cll = JSON.parse(xmlhttp.response);
+var ms = [];
+var bodydiv = document.querySelector('#bodydiv');
+for (var i = 0; i < cll.length; i++) {
+    var prot = cll[i][0];
+    var numseq = cll[i][1];
+    var titlediv = document.createElement('div');
+    titlediv.id = prot + '_title';
+    titlediv.className = 'titlediv';
+    titlediv.textContent = prot.replace('_', ' ');
+    bodydiv.appendChild(titlediv);
+    var div = document.createElement('div');
+    div.id = prot;
+    div.className = 'aligndiv';
+    bodydiv.appendChild(div);
+    var opts = {
+        el: div,
+        importURL: '/' + prot + '.clustal',
+        bootstrapMenu: true,
+        vis: {
+            conserv: true,
+            overviewbox: true,
+        },
+        zoomer: {
+            rowHeight: 15,
+            alignmentHeight: Math.min(15 * numseq, 500),
+            boxRectHeight: 2,
+            boxRectWidth: 1,
+        },
+    };
+    var m = msa(opts);
+    ms.push(m);
+    var hr = document.createElement('hr');
+    bodydiv.appendChild(hr);
+}
+</script>
+
+</body>
+</html>
